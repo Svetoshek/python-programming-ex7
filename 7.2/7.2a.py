@@ -1,12 +1,9 @@
-ignore = ["duplex", "alias", "configuration"]
-from sys import argv
-with open(argv[1]) as f:
-    for string in f:
-        if string[0] != "!":
-            continue
-        contain = False
-        for i in ignore:
-            if i in string:
-                contain = True
-        if not contain:
-            print(string.rstrip())
+ignore = ["duplex", "alias", "Current configuration"]
+
+with open('config_sw1.txt') as f:
+    for line in f:
+        for ignore_word in ignore:
+            if line.startswith("!") or ignore_word in line:
+                break
+        else:
+            print(line.rstrip())
